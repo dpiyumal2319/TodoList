@@ -10,6 +10,9 @@ app.use(express.json());
 //Middleware to parse URL-encoded bodies
 app.use(express.urlencoded( {extended: true} ));
 
+//Added public repository to serve static files
+app.use(express.static('public'));
+
 var items = ["Buy Food", "Cook Food", "Eat Food"];
 
 app.get('/', function(req, res) {
@@ -27,7 +30,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-    let item = req.body.newItem;
+    let item = req.body.newItem;<form class="item" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item"/>
+    <button type="submit">+</button>
+</form>
     items.push(item);
     res.redirect('/');
 })
