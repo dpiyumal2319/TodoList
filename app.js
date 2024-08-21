@@ -10,7 +10,7 @@ app.use(express.json());
 //Middleware to parse URL-encoded bodies
 app.use(express.urlencoded( {extended: true} ));
 
-var item = "";
+var items = ["Buy Food", "Cook Food", "Eat Food"];
 
 app.get('/', function(req, res) {
     var today = new Date();
@@ -23,11 +23,12 @@ app.get('/', function(req, res) {
     var day = today.toLocaleDateString("en-US", options);
 
     
-    res.render("list", {kindOfDay: day, newItem: item});
+    res.render("list", {kindOfDay: day, newListItems: items});
 });
 
 app.post('/', function(req, res) {
     item = req.body.newItem;
+    items.push(item);
     res.redirect('/');
 })
 
