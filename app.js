@@ -1,13 +1,10 @@
 const express = require('express');
-const bodyparser = require('body-parser');
-const request = require('request');
-let ejs = require('ejs');
+const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use("view-engine", "ejs");
+app.set("view engine", "ejs");
 
-app.use(bodyparser.urlencoded({extended: true}));
 
 app.get('/', function(req, res) {
     var today = new Date();
