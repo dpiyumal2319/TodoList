@@ -14,8 +14,8 @@ app.use(express.urlencoded( {extended: true} ));
 //Added public repository to serve static files
 app.use(express.static('public'));
 
-var items = ["Buy Food", "Cook Food", "Eat Food"];
-var workItems = [];
+const items = ["Buy Food", "Cook Food", "Eat Food"];
+const workItems = [];
 
 app.get('/', function(req, res) {
     let day = date.getDay();  
