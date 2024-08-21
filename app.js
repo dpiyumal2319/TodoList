@@ -14,6 +14,7 @@ app.use(express.urlencoded( {extended: true} ));
 app.use(express.static('public'));
 
 var items = ["Buy Food", "Cook Food", "Eat Food"];
+var workItems = [];
 
 app.get('/', function(req, res) {
     var today = new Date();
@@ -29,11 +30,27 @@ app.get('/', function(req, res) {
     res.render("list", {kindOfDay: day, newListItems: items});
 });
 
+app.get('/work', function(req, res) {
+    res.render("list", {kindOfDay: "Work List", newListItems: workItems});
+});
+
 app.post('/', function(req, res) {
     let item = req.body.newItem;
-    items.push(item);
-    res.redirect('/');
+
+    console.log(req.body.button);
+
+    if(req.body.button === "Work List") {
+        workItems.push(item);
+        res.redirect('/work');
+    } else{
+        items.push(item);
+        res.redirect('/');
+    }
 })
+
+app.get('/about', function(req, res) {
+    res.render("about");
+});
 
 app.listen(3000, function() {
     console.log('Server is running on port 3000');
