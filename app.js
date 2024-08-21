@@ -1,7 +1,8 @@
 const express = require('express');
-
 const app = express();
+const date = require(__dirname + "/date.js");
 
+//Set the view engine to ejs
 app.set("view engine", "ejs");
 
 //Middleware to parse JSON bodies
@@ -17,16 +18,7 @@ var items = ["Buy Food", "Cook Food", "Eat Food"];
 var workItems = [];
 
 app.get('/', function(req, res) {
-    var today = new Date();
-    var options = {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    };
-
-    var day = today.toLocaleDateString("en-US", options);
-
-    
+    let day = date.getDay();  
     res.render("list", {kindOfDay: day, newListItems: items});
 });
 
