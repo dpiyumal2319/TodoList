@@ -30,10 +30,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-    let item = req.body.newItem;<form class="item" action="/" method="post">
-    <input type="text" name="newItem" placeholder="New Item"/>
-    <button type="submit">+</button>
-</form>
+    let item = req.body.newItem;
     items.push(item);
     res.redirect('/');
 })
