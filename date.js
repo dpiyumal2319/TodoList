@@ -1,7 +1,4 @@
-
-module.exports.getDate = getDate;
-
-function getDate() {
+exports.getDate = function() {
     var today = new Date();
     var options = {
         weekday: "long",
@@ -14,10 +11,7 @@ function getDate() {
     return day;
 }
 
-
-module.exports.getDay = getDay;
-
-function getDay() {
+exports.getDay = function() {
     var today = new Date();
     var options = {
         weekday: "long",

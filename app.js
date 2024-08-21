@@ -29,8 +29,6 @@ app.get('/work', function(req, res) {
 app.post('/', function(req, res) {
     let item = req.body.newItem;
 
-    console.log(req.body.button);
-
     if(req.body.button === "Work List") {
         workItems.push(item);
         res.redirect('/work');
