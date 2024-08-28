@@ -35,7 +35,11 @@ const item2 = new Item({
     name: "Hit the + button to add a new item.",
 });
 
-const defaultItems = [item1, item2];
+const item3 = new Item({
+    name: "Check the checkbox to delete an item.",
+});
+
+const defaultItems = [item1, item2, item3];
 
 // const items = ["Buy Food", "Cook Food", "Eat Food"];
 // const workItems = [];
@@ -64,21 +68,28 @@ app.get("/", function (req, res) {
         });
 });
 
-app.get("/work", function (req, res) {
-    res.render("list", { kindOfDay: "Work List", newListItems: workItems });
-});
-
 app.post("/", function (req, res) {
-    let item = req.body.newItem;
+    const itemName = req.body.newItem;
 
-    if (req.body.button === "Work List") {
-        workItems.push(item);
-        res.redirect("/work");
-    } else {
-        items.push(item);
-        res.redirect("/");
-    }
+    //Create a new document and saving to db
+    const item = new Item({
+        name: itemName,
+    });
+    item.save();
+    res.redirect("/");
 });
+
+app.post("/deleteItem", (req, res) => {
+    const checkedID = req.body.checkbox;
+    
+    //Delete the item from the database
+    Item.findByIdAndDelete(checkedID).then((item) => {
+        console.log(`Successfully deleted item: ${item.name}`);
+        res.redirect("/");
+    }).catch((err) => {
+        console.log(err);
+    });
+})
 
 app.get("/about", function (req, res) {
     res.render("about");
