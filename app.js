@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
+const _ = require("lodash");
 
 //Set the view engine to ejs
 app.set("view engine", "ejs");
@@ -137,7 +138,7 @@ app.post("/deleteItem", (req, res) => {
 
 //Dynamic route for a dynamic todo list
 app.get("/:customListName", (req, res) => {
-    const customListName = req.params.customListName;
+    const customListName = _.capitalize(req.params.customListName);
 
     //Find the custom list in the database
     List.findOne({ name: customListName })
